@@ -6,6 +6,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use App\Models\Card;
+use App\Models\Reward;
 
 class Controller extends BaseController
 {
@@ -13,6 +15,8 @@ class Controller extends BaseController
 
     function make()
     {
+        $cards = Card::all();
+
         return view('dashboard/index');
     }
 }

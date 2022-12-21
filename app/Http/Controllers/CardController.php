@@ -11,6 +11,7 @@ class CardController extends Controller
     function dash()
     {
         $cards = Card::all();
-        return view('dashboard/index', [$cards => 'cards']);
+        return view('dashboard/index', ['cards' => $cards]);
     }
+
 }

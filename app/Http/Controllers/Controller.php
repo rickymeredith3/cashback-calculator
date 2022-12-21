@@ -13,10 +13,4 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    function make()
-    {
-        $cards = Card::all();
-
-        return view('dashboard/index');
-    }
 }

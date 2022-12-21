@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Rout;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\CardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +13,4 @@ use App\Http\Controllers\Controller;
 |
 */
 
-Route::get('/', [Controller::class, 'make'])->name('dashboard');
+Route::get('/', [CardController::class, 'dash'])->name('dashboard');

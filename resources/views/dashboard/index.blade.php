@@ -62,17 +62,16 @@
 							<div class="row">
 								<div class="col-8">
 									<label class="col-form-label" for="category">Category</label>
-									<input type="text" class="form-control" name="category">
+									<input type="text" class="form-control" name="category[]">
 								</div>
 								<div class="col-3">
 									<label class="col-form-label" for="rewards">Cashback</label>
-									<select class="form-select" name="rewards" id="rewards-dropdown">
+									<select class="form-select" name="rewards[]" id="rewards-dropdown">
 										<option value="1">1%</option>
 										<option value="2">2%</option>
 										<option value="3">3%</option>
 										<option value="4">4%</option>
 										<option value="5">5%</option>
-										<option value="0">Other</option>
 									</select>
 								</div>
 							</div>
@@ -92,7 +91,7 @@
 							<div class="col-8 text-end">
 								<div class="row justify-content-end">
 									<div class="col-3 d-grid px-1">
-										<button class="btn btn-dark" id="save-card">Save</button>
+										<a href="#" class="btn btn-dark" id="save-card">Save</a>
 									</div>
 									<div class="col-2 d-grid ps-1 me-2">
 										<button class="btn btn-secondary">Cancel</button>

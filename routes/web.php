@@ -15,4 +15,6 @@ use App\Http\Controllers\CardController;
 
 Route::get('/', [CardController::class, 'dash'])->name('dashboard');
 
-Route::post('/add-card', [CardController::class, 'storeCard']);
+Route::prefix('/api')->group(function () {
+	Route::post('/add-card', [CardController::class, 'storeCard']);
+});

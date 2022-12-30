@@ -14,4 +14,16 @@ class CardController extends Controller
         return view('dashboard/index', ['cards' => $cards]);
     }
 
+    function storeCard(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nickname' => 'required',
+            'bank' => 'required'
+        ]);
+
+        for ($i=0; $i < sizeof($request['rewards']); $i++) { 
+            echo $request['rewards'][$i];
+            echo $request['category'][$i];
+        }
+    }
 }

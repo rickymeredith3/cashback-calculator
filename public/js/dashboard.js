@@ -12,25 +12,15 @@ $(function () {
     addCard.show();
   });
   $('#add-reward').on('click', function () {
-    $('#rewards-container').append('<div class="row">' + '<div class="col-8">' + '<label class="col-form-label" for="category">Category</label>' + '<input type="text" class="form-control" name="category">' + '</div>' + '<div class="col-3">' + '<label class="col-form-label" for="rewards">Cashback</label>' + '<select class="form-select" name="rewards" id="rewards-dropdown">' + '<option value="1">1%</option>' + '<option value="2">2%</option>' + '<option value="3">3%</option>' + '<option value="4">4%</option>' + '<option value="5">5%</option>' + '<option value="0">Other</option>' + '</select>' + '</div>' + '</div>');
+    $('#rewards-container').append('<div class="row">' + '<div class="col-8">' + '<label class="col-form-label" for="category">Category</label>' + '<input type="text" class="form-control" name="category[]">' + '</div>' + '<div class="col-3">' + '<label class="col-form-label" for="rewards">Cashback</label>' + '<select class="form-select" name="rewards[]" id="rewards-dropdown">' + '<option value="1">1%</option>' + '<option value="2">2%</option>' + '<option value="3">3%</option>' + '<option value="4">4%</option>' + '<option value="5">5%</option>' + '<option value="0">Other</option>' + '</select>' + '</div>' + '</div>');
   });
   $('#remove-reward').on('click', function () {
     $('#rewards-container').children().last().remove();
   });
   $('#save-card').on('click', function () {
-    var form = $('#card-form')[0];
-    var data = new FormData(form);
-    console.log(data);
-    $.ajax({
-      type: "POST",
-      enctype: 'multipart/form-data',
-      url: "/add-card",
-      data: data,
-      processData: false,
-      contentType: false,
-      success: function success(data) {
-        console.log("success");
-      }
+    var form = $('#card-form');
+    $.post('/api/add-card', form.serialize(), function (response) {
+      console.log('success');
     });
   });
 });

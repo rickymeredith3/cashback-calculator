@@ -12,8 +12,7 @@ class CardController extends Controller
     function dash()
     {
         $cards = Card::all();
-        $rewards = Reward::all();
-        return view('dashboard/index', ['cards' => $cards, 'rewards' => $rewards]);
+        return view('dashboard/index', ['cards' => $cards]);
     }
 
     function storeCard(Request $request)
@@ -23,6 +22,14 @@ class CardController extends Controller
             'bank' => 'required',
             'category' => 'required'
         ]);
+
+        if ($validator->fails())
+        {
+            return response()->json([
+                'success'=> false, 
+                'errors' => $validator->errors(),
+            ]);
+        }
 
         $card = Card::create([
             'nickname' => $request['nickname'],
@@ -36,8 +43,8 @@ class CardController extends Controller
                 'category' => $request['category'][$i],
                 'reward' => $request['rewards'][$i]
             ]);
-            echo $request['rewards'][$i];
-            echo $request['category'][$i];
         }
+
+        return response()->json(['success' => true]);
     }
 }

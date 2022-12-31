@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-	<div class="container text-center p-3">
+	<div class="container text-center p-3" id="container">
 		<div class="row justify-content-around mt-5">
 			<div class="col-7">
 				<div class="card">
@@ -32,7 +32,16 @@
 						</div>
 					</div>
 					<div class="card-body">
-
+						@foreach ($cards as $card)
+							<div class="card text-start my-2">
+								<div class="card-header"><h5>{{$card->nickname}} - {{$card->bank}}</h5></div>
+								<div class="card-body">
+									@foreach($card->rewards as $reward)
+										<p class="card-text mb-2">{{$reward->reward}}%  -  {{$reward->category}}</p>
+									@endforeach
+								</div>
+							</div>
+						@endforeach
 					</div>
 				</div>
 			</div>
@@ -94,7 +103,7 @@
 										<a href="#" class="btn btn-dark" id="save-card">Save</a>
 									</div>
 									<div class="col-2 d-grid ps-1 me-2">
-										<button class="btn btn-secondary">Cancel</button>
+										<button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 									</div>
 								</div>
 							</div>

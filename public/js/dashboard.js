@@ -20,7 +20,12 @@ $(function () {
   $('#save-card').on('click', function () {
     var form = $('#card-form');
     $.post('/api/add-card', form.serialize(), function (response) {
-      console.log('success');
+      if (response.success == false) {
+        //
+      } else {
+        addCard.hide();
+        $('#container').load(location.href + ' #container');
+      }
     });
   });
 });

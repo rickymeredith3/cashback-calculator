@@ -9,6 +9,11 @@ class Card extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'bank',
+        'nickname'
+    ];
+
     function rewards()
     {
         return $this->hasMany(Reward::class);

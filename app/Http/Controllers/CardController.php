@@ -5,23 +5,37 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Card;
 use App\Models\Reward;
+use Illuminate\Support\Facades\Validator;
 
 class CardController extends Controller
 {
     function dash()
     {
         $cards = Card::all();
-        return view('dashboard/index', ['cards' => $cards]);
+        $rewards = Reward::all();
+        return view('dashboard/index', ['cards' => $cards, 'rewards' => $rewards]);
     }
 
     function storeCard(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nickname' => 'required',
-            'bank' => 'required'
+            'bank' => 'required',
+            'category' => 'required'
+        ]);
+
+        $card = Card::create([
+            'nickname' => $request['nickname'],
+            'bank' => $request['bank']
         ]);
 
         for ($i=0; $i < sizeof($request['rewards']); $i++) { 
+            
+            Reward::create([
+                'card_id' => $card->id,
+                'category' => $request['category'][$i],
+                'reward' => $request['rewards'][$i]
+            ]);
             echo $request['rewards'][$i];
             echo $request['category'][$i];
         }

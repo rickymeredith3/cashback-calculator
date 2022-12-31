@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Reward extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'card_id',
+        'category',
+        'reward'
+    ];
 }

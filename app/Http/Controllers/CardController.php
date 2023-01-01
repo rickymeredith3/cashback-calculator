@@ -11,8 +11,9 @@ class CardController extends Controller
 {
     function dash()
     {
-        $cards = Card::all();
-        return view('dashboard/index', ['cards' => $cards]);
+        $cards = Card::orderBy('id', 'desc')->get();
+        $categories = Reward::distinct('category')->orderBy('category')->pluck('category');
+        return view('dashboard/index', ['cards' => $cards, 'categories' => $categories]);
     }
 
     function storeCard(Request $request)
@@ -46,5 +47,18 @@ class CardController extends Controller
         }
 
         return response()->json(['success' => true]);
+    }
+
+    function calculate(Request $request, $category){
+        $reward = Reward::where('category', $category)->get();
+        $max = $reward->sortBy('reward')->first();
+        $card = Card::find($max->card_id);
+
+        return response()->json([
+            'success' => true,
+            'reward' => $max->reward,
+            'card' => $card->nickname
+        ]);
+        
     }
 }

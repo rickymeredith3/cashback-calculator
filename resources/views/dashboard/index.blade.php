@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-	<div class="container text-center p-3" id="container">
+	<div class="container p-3" id="container">
 		<div class="row justify-content-around mt-5">
 			<div class="col-7">
 				<div class="card">
@@ -13,7 +13,30 @@
 						<h2>Calculator</h2>
 					</div>
 					<div class="card-body">
-	
+						<form>
+							@csrf
+							<div class="row justify-content-center">
+
+								<div class="col-8">
+									<label for="calc-category" class="col-form-label">Purchase Category</label>
+									<select name="calc-category" id="calc-category" class="form-select">
+										@foreach ($categories as $category)
+											<option value="{{$category}}">{{$category}}</option>
+										@endforeach
+									</select>
+								</div>
+								<div class="row justify-content-center pt-4">
+									<div class="col-4 text-center">
+										<button class="btn btn-primary" id="calculate">Calculate</button>
+									</div>
+								</div>
+							</div>
+						</form>					
+						<div class="row mt-4" >
+							<hr>
+							<h5 class="card-title">For this purchase, you should use:</h5>
+							<p class="card-text"></p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -25,7 +48,7 @@
 								<h2>My Cards</h2>
 							</div>
 							<div class="col-4">
-								<button class="btn btn-dark" id="add-card">
+								<button class="btn btn-primary" id="add-card">
 									New Card
 								</button>
 							</div>
@@ -33,8 +56,8 @@
 					</div>
 					<div class="card-body">
 						@foreach ($cards as $card)
-							<div class="card text-start my-2">
-								<div class="card-header"><h5>{{$card->nickname}} - {{$card->bank}}</h5></div>
+							<div class="card my-2">
+								<div class="card-header"><h5>{{$card->nickname}}<span class="fw-light"> - {{$card->bank}}</span></h5></div>
 								<div class="card-body">
 									@foreach($card->rewards as $reward)
 										<p class="card-text mb-2">{{$reward->reward}}%  -  {{$reward->category}}</p>

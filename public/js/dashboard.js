@@ -28,6 +28,11 @@ $(function () {
       }
     });
   });
+  $('#calculate').on('click', function () {
+    $.get("/api/calculate/asdf", function (response) {
+      console.log(response.reward, response.card);
+    });
+  });
 });
 /******/ })()
 ;

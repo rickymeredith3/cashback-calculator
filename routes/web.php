@@ -17,4 +17,5 @@ Route::get('/', [CardController::class, 'dash'])->name('dashboard');
 
 Route::prefix('/api')->group(function () {
 	Route::post('/add-card', [CardController::class, 'storeCard']);
+	Route::get('/calculate/{category}', [CardController::class, 'calculate']);
 });

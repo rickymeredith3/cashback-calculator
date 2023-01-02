@@ -53,8 +53,12 @@ $(function(){
 
 	$('#calculate').on('click', function()
 	{
-		$.get("/api/calculate/asdf", function(response){
-			console.log(response.reward, response.card)
+		card = $('#calc-category').val()
+		$.get("/api/calculate/" + card, function(response){
+			console.log(response.reward, response.card);
+			$('#result-card').text(response.card + '          ');
+			$('#result-reward').text('          ' + response.reward + '%          ');
+			$('#results').show();
 		})
 	});
 });

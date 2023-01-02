@@ -51,7 +51,7 @@ class CardController extends Controller
 
     function calculate(Request $request, $category){
         $reward = Reward::where('category', $category)->get();
-        $max = $reward->sortBy('reward')->first();
+        $max = $reward->sortByDesc('reward')->first();
         $card = Card::find($max->card_id);
 
         return response()->json([

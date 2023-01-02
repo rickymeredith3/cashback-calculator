@@ -1,11 +1,12 @@
 
-$dark: #07C8DB;
-$secondary: #b6e6fc;
-$primary: #07C8DB;
+$dark: #45C4B0;
+$secondary: #45C4B0;
+$primary: #13678A;
 $font-family-base: "Poppins";
+$card-cap-bg: #13668a73;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 .page {
-	background-color: #e2f5ff;
+	background-color: #012030;
 }

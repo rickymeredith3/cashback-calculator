@@ -11,6 +11,25 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+$(function () {
+  window.showFormErrors = function (errors) {
+    $.each(errors, function (key, value) {
+      if ($('#' + key).length) {
+        $('#' + key).addClass('border-danger');
+        $('<p class="text-small text-danger">' + value + '</p>').insertAfter($('#' + key));
+      } else {
+        $('#' + key + '[]').addClass('border-danger');
+        $('<p class="text-small text-danger">' + value + '</p>').insertAfter($('#' + key + '[]'));
+      }
+    });
+  };
+  window.hideFormErrors = function (fields) {
+    $("p.text-danger").remove();
+    $.each(fields, function (index, value) {
+      $(value).removeClass("border-danger");
+    });
+  };
+});
 
 /***/ }),
 

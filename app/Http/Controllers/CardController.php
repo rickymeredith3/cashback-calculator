@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Card;
 use App\Models\Reward;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CardController extends Controller
 {
@@ -21,7 +22,6 @@ class CardController extends Controller
         $validator = Validator::make($request->all(), [
             'nickname' => 'required',
             'bank' => 'required',
-            'category' => 'required'
         ]);
 
         if ($validator->fails())

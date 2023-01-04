@@ -8,7 +8,7 @@
 	<div class="container p-3" id="container">
 		<div class="row justify-content-around mt-5">
 			<div class="col-7">
-				<div class="card">
+				<div class="card" id="calculator">
 					<div class="card-header text-start">
 						<h2>Calculator</h2>
 					</div>
@@ -41,7 +41,7 @@
 				</div>
 			</div>
 			<div class="col-4">
-				<div class="card">
+				<div class="card" id="cards">
 					<div class="card-header text-start">
 						<div class="row justify-content-between">
 							<div class="col-8">
@@ -93,9 +93,8 @@
 						<div class="container px-0" id="rewards-container">
 							<div class="row">
 								<div class="col-8">
-									<label class="col-form-label" for="category">Category</label>
-									<select name="category[]" id="category" class="form-select">
-										<option value="0">Select a Category</option>
+									<label class="col-form-label" for="category[]">Category</label>
+									<select name="category[]" id="category[]" class="form-select">
 										<option value="fitness">Fitness</option>
 										<option value="gas">Gas</option>
 										<option value="groceries">Groceries</option>
@@ -108,7 +107,7 @@
 								</div>
 								<div class="col-3">
 									<label class="col-form-label" for="rewards">Cashback</label>
-									<select class="form-select" name="rewards[]" id="rewards-dropdown">
+									<select class="form-select" name="rewards[]" id="rewards[]">
 										<option value="1">1%</option>
 										<option value="2">2%</option>
 										<option value="3">3%</option>

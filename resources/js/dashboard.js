@@ -4,26 +4,34 @@ $(function(){
 	});
 
 	$('#add-card').on('click', function(){
-		console.log('this works');
+		let form = $('#card-form');
+		hideFormErrors(form);
 		addCard.show();
 	});
 
 	$('#add-reward').on('click', function(){
 		$('#rewards-container').append(
-			'<div class="row">'+
+			'<div class="row mt-3">'+
 				'<div class="col-8">'+
-					'<label class="col-form-label" for="category">Category</label>'+
-					'<input type="text" class="form-control" name="category[]">'+
+					'<select name="category[]" id="category[]" class="form-select">'+
+						'<option value="fitness">Fitness</option>'+
+						'<option value="gas">Gas</option>'+
+						'<option value="groceries">Groceries</option>'+
+						'<option value="online purchases">Online Purchases</option>'+
+						'<option value="restaurants">Restaurants</option>'+
+						'<option value="streaming services">Streaming Services</option>'+
+						'<option value="travel">Travel</option>'+
+						'<option value="Other">Other</option>'+
+					'</select>'+
 				'</div>'+
 				'<div class="col-3">'+
-					'<label class="col-form-label" for="rewards">Cashback</label>'+
-					'<select class="form-select" name="rewards[]" id="rewards-dropdown">'+
+
+					'<select class="form-select" name="rewards[]" id="rewards[]">'+
 						'<option value="1">1%</option>'+
 						'<option value="2">2%</option>'+
 						'<option value="3">3%</option>'+
 						'<option value="4">4%</option>'+
 						'<option value="5">5%</option>'+
-						'<option value="0">Other</option>'+
 					'</select>'+
 				'</div>'+
 			'</div>'
@@ -36,17 +44,19 @@ $(function(){
 
 	$('#save-card').on('click', function(){
 		let form = $('#card-form');
+		hideFormErrors(form);
 
 		$.post('/api/add-card', form.serialize(), function(response)
 		{
 			if(response.success == false)
 			{
-				//
+				showFormErrors(response.errors)
 			}
 			else
 			{
 				addCard.hide();
-				$('#container').load(location.href + ' #container');
+				$('#cards').load(location.href + ' #cards');
+				$('#calculator').load(location.href + ' #calculator');
 			}
 		});
 	});

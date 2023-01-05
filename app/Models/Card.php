@@ -16,6 +16,6 @@ class Card extends Model
 
     function rewards()
     {
-        return $this->hasMany(Reward::class);
+        return $this->hasMany(Reward::class)->orderBy('reward', 'desc');
     }
 }

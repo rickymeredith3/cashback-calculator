@@ -7,7 +7,8 @@ $(function () {
   var addCard = new bootstrap.Modal('#add-card-popup', {
     keyboard: false
   });
-  $('#add-card').on('click', function () {
+  $('#add-card').on('click', function (event) {
+    event.stopPropagation();
     var form = $('#card-form');
     hideFormErrors(form);
     addCard.show();
@@ -18,19 +19,38 @@ $(function () {
   $('#remove-reward').on('click', function () {
     $('#rewards-container').children().last().remove();
   });
-  $('#save-card').on('click', function () {
+  $('#save-card').on('click', function (event) {
+    event.stopPropagation();
     var form = $('#card-form');
     hideFormErrors(form);
-    $.post('/api/add-card', form.serialize(), function (response) {
-      if (response.success == false) {
-        showFormErrors(response.errors);
-      } else {
+    $.ajax({
+      type: "POST",
+      url: '/api/add-card',
+      data: form.serialize(),
+      error: function error(data, status, xhr) {
+        showFormErrors(xhr.JSONresponse.errors);
+      },
+      success: function success(data, status, xhr) {
         addCard.hide();
-        $('#cards').load(location.href + ' #cards');
-        $('#calculator').load(location.href + ' #calculator');
+        location.reload(true);
       }
     });
+
+    /*$.post('/api/add-card', form.serialize(), function(response)
+    {
+    	if(response.success == false)
+    	{
+    		
+    	}
+    	else
+    	{
+    		addCard.hide();
+    		$('#cards').load();
+    		$('#calculator').load();
+    	}
+    });*/
   });
+
   $('#calculate').on('click', function () {
     card = $('#calc-category').val();
     $.get("/api/calculate/" + card, function (response) {

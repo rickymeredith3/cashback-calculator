@@ -3,7 +3,8 @@ $(function(){
 		keyboard: false
 	});
 
-	$('#add-card').on('click', function(){
+	$('#add-card').on('click', function(event){
+		event.stopPropagation();
 		let form = $('#card-form');
 		hideFormErrors(form);
 		addCard.show();
@@ -42,23 +43,37 @@ $(function(){
 		$('#rewards-container').children().last().remove();
 	});
 
-	$('#save-card').on('click', function(){
+	$('#save-card').on('click', function(event){
+		event.stopPropagation();
 		let form = $('#card-form');
 		hideFormErrors(form);
 
-		$.post('/api/add-card', form.serialize(), function(response)
+		$.ajax({
+			type: "POST",
+			url: '/api/add-card',
+			data: form.serialize(),
+			error: function(data, status, xhr){
+				showFormErrors(xhr.JSONresponse.errors);
+			},
+			success: function(data, status, xhr){
+				addCard.hide();
+				location.reload(true)
+			}
+		});
+
+		/*$.post('/api/add-card', form.serialize(), function(response)
 		{
 			if(response.success == false)
 			{
-				showFormErrors(response.errors)
+				
 			}
 			else
 			{
 				addCard.hide();
-				$('#cards').load(location.href + ' #cards');
-				$('#calculator').load(location.href + ' #calculator');
+				$('#cards').load();
+				$('#calculator').load();
 			}
-		});
+		});*/
 	});
 
 	$('#calculate').on('click', function()

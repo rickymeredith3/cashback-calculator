@@ -17,7 +17,7 @@ class CardController extends Controller
         return view('dashboard/index', ['cards' => $cards, 'categories' => $categories]);
     }
 
-    function storeCard(Request $request)
+    function storeCard(Request $request, Card $card)
     {
         $validator = Validator::make($request->all(), [
             'nickname' => 'required',
@@ -32,10 +32,21 @@ class CardController extends Controller
             ]);
         }
 
-        $card = Card::create([
+        $card->fill([
             'nickname' => $request['nickname'],
             'bank' => $request['bank']
         ]);
+        
+
+        if($card->id != 0)
+        {
+            $card->save();
+            return response()->json([
+                'success' => true
+            ]);
+        }
+
+        $card->save();
 
         for ($i=0; $i < sizeof($request['rewards']); $i++) { 
             
@@ -47,6 +58,15 @@ class CardController extends Controller
         }
 
         return response()->json(['success' => true]);
+    }
+
+    function getCard(Request $request, Card $card)
+    {
+        return response()->json([
+            'success' => true,
+            'card' =>  $card,
+            'rewards' => $card->rewards
+        ]);
     }
 
     function calculate(Request $request, $category){

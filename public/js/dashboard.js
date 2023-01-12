@@ -9,8 +9,7 @@ $(function () {
   });
   $('#add-card').on('click', function (event) {
     event.stopPropagation();
-    var form = $('#card-form');
-    hideFormErrors(form);
+    hideFormErrors($('#card-form'));
     addCard.show();
   });
   $('#add-reward').on('click', function () {
@@ -23,9 +22,13 @@ $(function () {
     event.stopPropagation();
     var form = $('#card-form');
     hideFormErrors(form);
+    var url = '/api/card';
+    if ($('#card-id').val() != 0) {
+      url += '/' + $('#card-id').val();
+    }
     $.ajax({
       type: "POST",
-      url: '/api/add-card',
+      url: url,
       data: form.serialize(),
       error: function error(data, status, xhr) {
         showFormErrors(xhr.JSONresponse.errors);
@@ -35,22 +38,24 @@ $(function () {
         location.reload(true);
       }
     });
-
-    /*$.post('/api/add-card', form.serialize(), function(response)
-    {
-    	if(response.success == false)
-    	{
-    		
-    	}
-    	else
-    	{
-    		addCard.hide();
-    		$('#cards').load();
-    		$('#calculator').load();
-    	}
-    });*/
   });
-
+  $('.edit-card').on('click', function (event) {
+    event.stopPropagation();
+    var id = $(this).data('card-id');
+    $('#card-id').val(id);
+    var form = $('#card-form');
+    hideFormErrors(form);
+    $.get('/api/card/' + id, function (response) {
+      if (response.success) {
+        var _card = response.card;
+        $('#nickname').val(_card.nickname);
+        $('#bank').val(_card.bank);
+        $('.rewards-section').hide();
+        addCard.show();
+        console.log(_card.rewards);
+      }
+    });
+  });
   $('#calculate').on('click', function () {
     card = $('#calc-category').val();
     $.get("/api/calculate/" + card, function (response) {

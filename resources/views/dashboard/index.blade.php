@@ -57,7 +57,16 @@
 					<div class="card-body">
 						@foreach ($cards as $card)
 							<div class="card my-2">
-								<div class="card-header"><h5>{{$card->nickname}}<span class="fw-light"> - {{$card->bank}}</span></h5></div>
+								<div class="card-header">
+									<div class="row justify-content-around">
+										<div class="col-10">
+											<h5>{{$card->nickname}}<span class="fw-light"> - {{$card->bank}}</span></h5>
+										</div>
+										<div class="col-2">
+											<a href="#" class="edit-card" data-card-id="{{ $card->id }}"><img src="/storage/edit.svg" alt="edit button"></a>
+										</div>
+									</div>
+								</div>
 								<div class="card-body">
 									@foreach($card->rewards as $reward)
 										<p class="card-text mb-2">{{$reward->reward}}%  -  {{ucwords($reward->category)}}</p>
@@ -79,6 +88,7 @@
 				<div class="modal-body">
 					<form id="card-form">
 						@csrf
+						<input type="hidden" id="card-id" name="card-id" value="0" />
 						<div class="row">
 							<div class="col-6">
 								<label for="nickname" class="col-form-label">Card Nickname</label>
@@ -89,43 +99,45 @@
 								<input class="form-control" type="text" name="bank" id="bank">
 							</div>
 						</div>
-						<hr>
-						<div class="container px-0" id="rewards-container">
-							<div class="row">
-								<div class="col-8">
-									<label class="col-form-label" for="category[]">Category</label>
-									<select name="category[]" id="category[]" class="form-select">
-										<option value="fitness">Fitness</option>
-										<option value="gas">Gas</option>
-										<option value="groceries">Groceries</option>
-										<option value="online purchases">Online Purchases</option>
-										<option value="restaurants">Restaurants</option>
-										<option value="streaming services">Streaming Services</option>
-										<option value="travel">Travel</option>
-										<option value="Other">Other</option>
-									</select>
-								</div>
-								<div class="col-3">
-									<label class="col-form-label" for="rewards">Cashback</label>
-									<select class="form-select" name="rewards[]" id="rewards[]">
-										<option value="1">1%</option>
-										<option value="2">2%</option>
-										<option value="3">3%</option>
-										<option value="4">4%</option>
-										<option value="5">5%</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div class="d-flex justify-content-around mt-3">							
-							<div class="col-8"></div>
-							<div class="col-3 d-flex justify-content-end pe-2">
-								<div class="btn-group" role="group">
-									<a href="#" class="btn btn-primary" id="add-reward">+</a>
-									<a href="#" class="btn btn-primary" id="remove-reward">-</a>
+						<div class="rewards-section">
+							<hr>
+							<div class="container px-0" id="rewards-container">
+								<div class="row">
+									<div class="col-8">
+										<label class="col-form-label" for="category[]">Category</label>
+										<select name="category[]" id="category[]" class="form-select">
+											<option value="fitness">Fitness</option>
+											<option value="gas">Gas</option>
+											<option value="groceries">Groceries</option>
+											<option value="online purchases">Online Purchases</option>
+											<option value="restaurants">Restaurants</option>
+											<option value="streaming services">Streaming Services</option>
+											<option value="travel">Travel</option>
+											<option value="Other">Other</option>
+										</select>
+									</div>
+									<div class="col-3">
+										<label class="col-form-label" for="rewards">Cashback</label>
+										<select class="form-select" name="rewards[]" id="rewards[]">
+											<option value="1">1%</option>
+											<option value="2">2%</option>
+											<option value="3">3%</option>
+											<option value="4">4%</option>
+											<option value="5">5%</option>
+										</select>
+									</div>
 								</div>
 							</div>
-							
+							<div class="d-flex justify-content-around mt-3" id="rewards-buttons">							
+								<div class="col-8"></div>
+								<div class="col-3 d-flex justify-content-end pe-2">
+									<div class="btn-group" role="group">
+										<a href="#" class="btn btn-primary rewards-button" id="add-reward">+</a>
+										<a href="#" class="btn btn-primary rewards-button" id="remove-reward">-</a>
+									</div>
+								</div>
+								
+							</div>
 						</div>
 						<hr>
 						<div class="row justify-content-end">

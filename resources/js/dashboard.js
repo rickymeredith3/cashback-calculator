@@ -5,8 +5,7 @@ $(function(){
 
 	$('#add-card').on('click', function(event){
 		event.stopPropagation();
-		let form = $('#card-form');
-		hideFormErrors(form);
+		hideFormErrors($('#card-form'));
 		addCard.show();
 	});
 
@@ -47,10 +46,15 @@ $(function(){
 		event.stopPropagation();
 		let form = $('#card-form');
 		hideFormErrors(form);
+		let url = '/api/card'
+		if($('#card-id').val() != 0)
+		{
+			url += '/' + $('#card-id').val();
+		}
 
 		$.ajax({
 			type: "POST",
-			url: '/api/add-card',
+			url: url,
 			data: form.serialize(),
 			error: function(data, status, xhr){
 				showFormErrors(xhr.JSONresponse.errors);
@@ -61,20 +65,26 @@ $(function(){
 			}
 		});
 
-		/*$.post('/api/add-card', form.serialize(), function(response)
-		{
-			if(response.success == false)
-			{
-				
-			}
-			else
-			{
-				addCard.hide();
-				$('#cards').load();
-				$('#calculator').load();
-			}
-		});*/
 	});
+
+	$('.edit-card').on('click', function(event){
+		event.stopPropagation();
+		let id = $(this).data('card-id');
+		$('#card-id').val(id);
+		let form = $('#card-form');
+		hideFormErrors(form);
+		$.get('/api/card/' + id, function(response){
+			if (response.success)
+			{
+				let card = response.card;
+				$('#nickname').val(card.nickname);
+				$('#bank').val(card.bank);
+				$('.rewards-section').hide();
+				addCard.show();
+				console.log(card.rewards)
+			}
+		});
+	})
 
 	$('#calculate').on('click', function()
 	{

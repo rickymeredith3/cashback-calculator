@@ -59,11 +59,12 @@
 							<div class="card my-2">
 								<div class="card-header">
 									<div class="row justify-content-around">
-										<div class="col-10">
-											<h5>{{$card->nickname}}<span class="fw-light"> - {{$card->bank}}</span></h5>
+										<div class="col-8">
+											<h5>{{$card->nickname}}<br><span class="fw-light">{{$card->bank}}</span></h5>
 										</div>
-										<div class="col-2">
-											<a href="#" class="edit-card" data-card-id="{{ $card->id }}"><img src="/storage/edit.svg" alt="edit button"></a>
+										<div class="col-3">
+											<a href="#" class="edit-card pe-3" data-card-id="{{ $card->id }}"><img src="/storage/edit.svg" alt="edit button"></a>
+											<a href="#" class="delete-card" data-card-id="{{ $card->id }}"><img src="/storage/delete.svg" alt="delete button"></a>
 										</div>
 									</div>
 								</div>

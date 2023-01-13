@@ -86,6 +86,18 @@ $(function(){
 		});
 	})
 
+	$('.delete-card').on('click', function(event){
+		event.stopPropagation();
+		let id = $(this).data('card-id');
+		$.get('/api/card/' + id + '/delete', function(response){
+			if (response.success)
+			{
+				alert('Card has been deleted.');
+				location.reload(true);
+			}
+		});
+	})
+
 	$('#calculate').on('click', function()
 	{
 		card = $('#calc-category').val()

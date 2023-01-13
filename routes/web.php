@@ -20,4 +20,5 @@ Route::prefix('/api')->group(function () {
 	Route::post('/card/{card}', [CardController::class, 'storeCard']);
 	Route::get('/card/{card}', [CardController::class, 'getCard']);
 	Route::get('/calculate/{category}', [CardController::class, 'calculate']);
+	Route::get('/card/{card}/delete', [CardController::class, 'delete']);
 });

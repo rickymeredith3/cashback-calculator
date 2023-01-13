@@ -81,4 +81,14 @@ class CardController extends Controller
         ]);
         
     }
+
+    function delete(Request $request, Card $card)
+    {
+        Reward::where('card_id', $card->id)->delete();
+        $card->delete();
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
 }

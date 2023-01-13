@@ -56,6 +56,16 @@ $(function () {
       }
     });
   });
+  $('.delete-card').on('click', function (event) {
+    event.stopPropagation();
+    var id = $(this).data('card-id');
+    $.get('/api/card/' + id + '/delete', function (response) {
+      if (response.success) {
+        alert('Card has been deleted.');
+        location.reload(true);
+      }
+    });
+  });
   $('#calculate').on('click', function () {
     card = $('#calc-category').val();
     $.get("/api/calculate/" + card, function (response) {

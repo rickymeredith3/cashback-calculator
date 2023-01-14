@@ -27,7 +27,7 @@
 								</div>
 								<div class="row justify-content-center pt-4">
 									<div class="col-4 text-center">
-										<a href="#" class="btn btn-primary" id="calculate">Calculate</a>
+										<button type="button" class="btn btn-primary" id="calculate">Calculate</button>
 									</div>
 								</div>
 							</div>
@@ -48,7 +48,7 @@
 								<h2>My Cards</h2>
 							</div>
 							<div class="col-4">
-								<button class="btn btn-primary" id="add-card">
+								<button type="button" class="btn btn-primary" id="add-card">
 									New Card
 								</button>
 							</div>
@@ -133,8 +133,8 @@
 								<div class="col-8"></div>
 								<div class="col-3 d-flex justify-content-end pe-2">
 									<div class="btn-group" role="group">
-										<a href="#" class="btn btn-primary rewards-button" id="add-reward">+</a>
-										<a href="#" class="btn btn-primary rewards-button" id="remove-reward">-</a>
+										<button type="button" class="btn btn-primary rewards-button" id="add-reward">+</button>
+										<button type="button" class="btn btn-primary rewards-button" id="remove-reward">-</button>
 									</div>
 								</div>
 								
@@ -145,10 +145,10 @@
 							<div class="col-8 text-end">
 								<div class="row justify-content-end">
 									<div class="col-3 d-grid px-1">
-										<a href="#" class="btn btn-primary" id="save-card">Save</a>
+										<button type="button" class="btn btn-primary" id="save-card">Save</button>
 									</div>
 									<div class="col-2 d-grid ps-1 me-2">
-										<button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 									</div>
 								</div>
 							</div>
